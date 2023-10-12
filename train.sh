@@ -1,9 +1,8 @@
-. /home/gs534/rds/hpc-work/work/espnet/tools/anaconda/etc/profile.d/conda.sh && conda deactivate && conda activate espnet
+# . /home/gs534/rds/hpc-work/work/espnet/tools/anaconda/etc/profile.d/conda.sh && conda deactivate && conda activate espnet
 expdir=finetune_librispeech_lr0.0005_KB200_drop0.1_GPThid
 mkdir -p exp/${expdir}
 python train.py \
-    --train_json data/LibriSpeech/train_clean_100_f15.json \
-    --dev_json data/LibriSpeech/dev_f15.json \
+    --train_json data/LibriSpeech/train_clean_100_full.json \
     --lr 0.0005 \
     --batch_size 16 \
     --log_interval 20 \

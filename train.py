@@ -1,6 +1,7 @@
 import sys, os
 import re
 import time
+from tqdm import tqdm
 
 import whisper
 from whisper.model import WhisperBiasing
@@ -106,10 +107,10 @@ optimiser = Adam(whisperbiasing.parameters(), lr=args.lr)
 ##################
 logging("Start of training", args.logfile)
 bestacc = 0
-for epoch in range(args.nepochs):
+for epoch in tqdm(range(args.nepochs)):
     start = time.time()
     totalloss = 0
-    for idx, data in enumerate(trainloader):
+    for idx, data in tqdm(enumerate(trainloader)):
         uttnames, fbank, tgt, blist = data
         lextree = biasproc.get_lextree(blist)
         fbank = fbank.to(model.device)
@@ -171,7 +172,7 @@ for epoch in range(args.nepochs):
     totalvalacc = 0
     model.eval()
     with torch.no_grad():
-        for idx, data in enumerate(devloader):
+        for idx, data in tqdm(enumerate(devloader)):
             uttnames, fbank, tgt, blist = data
             lextree = biasproc.get_lextree(blist)
             fbank = fbank.to(model.device)

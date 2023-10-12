@@ -305,7 +305,7 @@ def get_tokenizer(
 
     tokenizer = build_tokenizer(name=tokenizer_name)
     all_special_ids: List[int] = tokenizer.all_special_ids
-    sot: int = all_special_ids[1]
+    sot: int = all_special_ids[0]
     translate: int = all_special_ids[-6]
     transcribe: int = all_special_ids[-5]
 

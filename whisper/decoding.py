@@ -511,7 +511,10 @@ class DecodingTask:
 
         self.initial_tokens: Tuple[int] = self._get_initial_tokens()
         self.sample_begin: int = len(self.initial_tokens)
-        self.sot_index: int = self.initial_tokens.index(tokenizer.sot)
+        # -------------------------------------------
+        # "<|startoftranscript|>" id should be 50256.
+        # -------------------------------------------
+        self.sot_index: int = self.initial_tokens.index(50256)
 
         # inference: implements the forward pass through the decoder, including kv caching
         self.inference = PyTorchInference(model, len(self.initial_tokens))
